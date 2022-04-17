@@ -7,6 +7,7 @@ import './database';
 
 import relatorioRoutes from './routes/relatorio.js';
 import emailRoutes from './routes/email.js';
+import horaRoutes from './routes/hora';
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ class App {
   routes() {
     this.app.use('/relatorios', relatorioRoutes);
     this.app.use('/emails', emailRoutes);
+    this.app.use('/horas', horaRoutes);
     this.app.use('/files', express.static(`${__dirname}/files`));
   }
 }

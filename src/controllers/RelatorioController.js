@@ -38,11 +38,11 @@ class RelatorioController {
       if (relatorioGerado) {
         return res.send(relatorioGerado);
       }
-      return res.status(404).send({
+      return res.status(404).json({
         error: 'Não foi possível gerar o PDF',
       });
     } catch (e) {
-      return res.status(404).send({
+      return res.status(404).json({
         error: 'Não foi possível gerar o PDF',
       });
     }
