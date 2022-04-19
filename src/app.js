@@ -8,6 +8,7 @@ import './database';
 import relatorioRoutes from './routes/relatorio.js';
 import emailRoutes from './routes/email.js';
 import horaRoutes from './routes/hora';
+import entidadeRoutes from './routes/entidade';
 
 dotenv.config();
 
@@ -26,10 +27,12 @@ class App {
   }
 
   routes() {
-    this.app.use('/relatorios', relatorioRoutes);
-    this.app.use('/emails', emailRoutes);
-    this.app.use('/horas', horaRoutes);
-    this.app.use('/files', express.static(`${__dirname}/files`));
+    this.app.use('/api/relatorios', relatorioRoutes);
+    this.app.use('/api/emails', emailRoutes);
+    this.app.use('/api/horas', horaRoutes);
+    this.app.use('/api/horas', horaRoutes);
+    this.app.use('/api/entidades', entidadeRoutes);
+    this.app.use('/api/files', express.static(`${__dirname}/files`));
   }
 }
 
