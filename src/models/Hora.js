@@ -4,8 +4,11 @@ export default class Hora extends Model {
   static init(sequelize) {
     super.init(
       {
-        idEntidade: DataTypes.INTEGER,
-        segundos: DataTypes.BIGINT,
+        idEntidade: {
+          type: DataTypes.INTEGER,
+          unique: true,
+        },
+        segundosDisponiveis: DataTypes.BIGINT,
       },
       {
         sequelize,
