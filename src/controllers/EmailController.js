@@ -7,7 +7,9 @@ class EmailController {
         where: {
           idEntidade: req.params.id,
         },
+        attributes: ['id', 'endereco'],
       });
+
       return res.json(emails);
     } catch (e) {
       console.error(e);
