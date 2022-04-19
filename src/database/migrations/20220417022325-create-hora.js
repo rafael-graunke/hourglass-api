@@ -10,8 +10,9 @@ module.exports = {
       id_entidade: {
         type: Sequelize.INTEGER,
       },
-      segundos: {
+      segundos_disponiveis: {
         type: Sequelize.BIGINT,
+        defaultValue: 0,
       },
       created_at: {
         allowNull: false,
