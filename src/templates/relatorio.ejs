@@ -1,0 +1,97 @@
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: sans-serif;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    body,
+    html,
+    :root {
+      padding: 1em;
+      max-width: 1080px;
+    }
+
+    .table {
+      border-radius: 5px;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table table * {
+      font-size: 12px;
+    }
+
+    .table thead,
+    .table tfoot {
+      height: 35px;
+      width: 100%;
+      text-align: center;
+      padding: 0.5em 0;
+      background-color: #393939;
+      color: #fff;
+    }
+
+    .table tr {
+      width: 100%;
+      height: 35px;
+      text-align: center;
+      padding: 0 2em;
+    }
+
+    .odd {
+      background-color: #e9e9e9;
+    }
+  </style>
+</head>
+
+<body>
+  <% let tempoTotal = 0; %>
+  <h3>Chamados</h5>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Título</th>
+            <th>Status</th>
+            <th>Requerente</th>
+            <th>Aberto</th>
+            <th>Fechado</th>
+            <th>Tempo</th>
+          </tr>
+        </thead>
+        <% if (chamados.length > 0) { %>
+        <% chamados.forEach((chamado, index) => {%>
+        <tr <% if (index % 2 !== 0) { %>class="odd" <% } %>>
+          <td><%= chamado.numero %></td>
+          <td><%= chamado.titulo %></td>
+          <td><%= chamado.status === 2 ? 'Processando' : 'Solucionado' %></td>
+          <td><%= chamado.requerente %></td>
+          <td><%= new Date(chamado.aberto).toLocaleString('pt-BR') %></td>
+          <td><%= new Date(chamado.fechado).toLocaleString('pt-BR') %></td>
+          <td><%= chamado.tempo %></td>
+          <% tempoTotal += Number(chamado.tempo) %>
+        </tr>
+        <%  });%>
+        <% }%>
+        <tfoot>
+          <tr>
+            <th colspan="6">Tempo Total</th>
+            <th><%= tempoTotal %></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+</body>
+
+</html>
