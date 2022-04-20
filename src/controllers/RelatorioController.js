@@ -38,14 +38,17 @@ async function criaRelatorio({ idEntidade, dataInicial, dataFinal }) {
   );
 
   ejs.renderFile(
-    path.resolve(__dirname, '..', 'templates', 'relatorios.ejs'),
+    path.resolve(__dirname, '..', 'templates', 'relatorio.ejs'),
     { chamados },
     (error, data) => {
       if (error) {
         console.error(error);
       } else {
+        const options = {
+          format: 'A3',
+        };
         pdf
-          .create(data)
+          .create(data, options)
           .toFile(
             path.resolve(__dirname, '..', 'files', nomeArquivo),
             (error, res) => {
