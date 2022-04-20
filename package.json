@@ -1,5 +1,5 @@
 {
-  "name": "relatorios-backend",
+  "name": "hourglass-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,8 +8,8 @@
     "build": "sucrase ./src -d ./dist --transforms imports"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Rafael Borges Graunke",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
