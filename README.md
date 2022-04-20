@@ -10,7 +10,7 @@ Sendo assim, para cada cliente (entidade do GLPI) é possível:
 - [x] Configurar as horas contratadas;
 - [x] Gerar relatórios contendo todos os chamados de determinado período de tempo;
   - O relatório conta com o tempo empregado por chamado e o tempo total, empregado durante todo o período de tempo informado;
-- [] Enviar automaticamente notificações por e-mail, informando quando determinado percentual de utilização foi atingido;
+- [ ] Enviar automaticamente notificações por e-mail, informando quando determinado percentual de utilização foi atingido;
 - [x] Cadastrar e-mails que irão receber as notificações.
 
 ## Documentação
