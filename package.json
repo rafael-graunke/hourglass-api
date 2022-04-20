@@ -19,7 +19,6 @@
     "helmet": "^5.0.2",
     "html-pdf": "^3.0.1",
     "mariadb": "^3.0.0",
-    "pdfmake": "^0.2.5",
     "sequelize": "^6.19.0",
     "sequelize-cli": "^6.4.1"
   },
