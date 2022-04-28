@@ -1,19 +1,19 @@
-require('dotenv').config();
+const config = require('./config');
 
 module.exports = {
   dialect: 'mariadb',
-  host: process.env.DATABASE_HOST,
-  port: process.env.DATABASE_PORT,
-  username: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE,
+  host: config.databaseHost,
+  port: config.databasePort,
+  username: config.databaseUser,
+  password: config.databasePass,
+  database: config.databaseName,
   define: {
     timestamps: true,
     underscored: true,
     underscoredAll: true,
   },
   dialectOptions: {
-    timezone: 'America/Sao_Paulo',
+    timezone: config.timezone,
   },
-  timezone: 'America/Sao_Paulo',
+  timezone: config.timezone,
 };
