@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang=pt-br>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,400&family=Ubuntu:wght@300&display=swap"
+    rel="stylesheet">
+  <style media="screen">
+    p {
+      font-family: 'Ubuntu', sans-serif;
+      color: black;
+      font-size: 20px;
+    }
+
+    table {
+      min-width: 700px;
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .header {
+      background-color: #1B3281;
+      color: white;
+      height: 30px;
+      font-family: 'Ubuntu', sans-serif;
+    }
+
+    .even {
+      background-color: #dddddd;
+    }
+
+    tr {
+      background-color: #efefef;
+      height: 30px;
+
+    }
+
+    .tabela,
+    .footer {
+      text-align: center;
+      width: 100%;
+    }
+
+    hr {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    table tr:last-child td:first-child {
+      border-bottom-left-radius: 5px;
+    }
+
+    table tr:last-child td:last-child {
+      border-bottom-right-radius: 5px;
+    }
+
+    table tr:first-child th:first-child {
+      border-top-left-radius: 5px;
+    }
+
+    table tr:first-child th:last-child {
+      border-top-right-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="tabela">
+    <p>Olá
+      <%= name %>,
+    </p>
+    <p>
+      <%= mensagem.text %>
+    </p>
+    <table>
+      <thead>
+        <tr class="header">
+          <th>Horas Utilizadas</th>
+          <th>Horas Contratadas</th>
+          <th>Percentual de Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <h1><%= segundosGastos %>h</h1>
+          </td>
+          <td>
+            <h1><%= segundosDisponiveis %>h</h1>
+          </td>
+          <td>
+            <h1><%= percentual.toFixed(2) %>%</h1>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <hr>
+  <div class="footer">
+    <p>Essa mensagem foi gerada automaticamente pelos sistemas da </p> <br>
+    <img src=<%= mensagem.companyLogoUrl %> alt="Logo" width="150px">
+  </div>
+</body>
+
+</html>
