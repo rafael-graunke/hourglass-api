@@ -9,6 +9,7 @@ export default class Hora extends Model {
           unique: true,
         },
         segundosDisponiveis: DataTypes.BIGINT,
+        ultimaNotificacao: DataTypes.INTEGER,
       },
       {
         sequelize,
