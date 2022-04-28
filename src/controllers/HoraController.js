@@ -10,9 +10,10 @@ class HoraController {
         idEntidade,
         segundosDisponiveis,
         segundosGastos,
+        ultimaNotificacao,
         percentual,
         existe,
-      ] = [Number(req.params.id), Number(req.params.id), 0, 0, 0, false];
+      ] = [Number(req.params.id), Number(req.params.id), 0, 0, 0, 0, false];
 
       const hora = await Hora.findOne({
         where: {
@@ -24,6 +25,7 @@ class HoraController {
         id = hora.id;
         idEntidade = hora.idEntidade;
         segundosDisponiveis = hora.segundosDisponiveis;
+        ultimaNotificacao = hora.ultimaNotificacao;
         existe = true;
       }
 
@@ -65,6 +67,7 @@ class HoraController {
         idEntidade,
         segundosDisponiveis,
         segundosGastos,
+        ultimaNotificacao,
         percentual,
         existe,
       });
@@ -83,7 +86,12 @@ class HoraController {
 
   async update(req, res) {
     try {
-      return res.json(Hora.upsert({ id: req.params.id, ...req.body }));
+      return res.json(
+        await Hora.update(
+          { ...req.body },
+          { where: { idEntidade: req.params.id } }
+        )
+      );
     } catch (e) {
       console.error(e);
     }
