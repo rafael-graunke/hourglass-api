@@ -1,8 +1,8 @@
 import { QueryTypes } from 'sequelize';
 import ejs from 'ejs';
-import fs from 'fs';
-import pdf from 'html-pdf';
+import fs from 'fs/promises';
 import path from 'path';
+import pdf from 'html-pdf';
 import Relatorio from '../models/Relatorio';
 import glpiDatabase from '../config/glpiDatabase';
 
@@ -14,53 +14,38 @@ async function excluiRelatorio(nome) {
 
 async function criaRelatorio({ idEntidade, dataInicial, dataFinal }) {
   const nomeArquivo = `${Date.now().toString()}.pdf`;
-
-  const chamados = await glpiDatabase.query(
-    `SELECT glpi_tickettasks.tickets_id as numero,
-    glpi_tickets.name as titulo,
-    glpi_tickets.status as status,
-    CONCAT(glpi_users.realname, ' ', glpi_users.firstname) as requerente,
-    glpi_tickets.date as aberto,
-    glpi_tickets.solvedate as fechado,
-    SUM(glpi_tickettasks.actiontime) as tempo
-    FROM glpi_tickets
-    INNER JOIN glpi_users
-    ON glpi_tickets.users_id_recipient = glpi_users.id
-    INNER JOIN glpi_tickettasks
-    ON glpi_tickets.id = glpi_tickettasks.tickets_id
-    WHERE glpi_tickets.entities_id = ?
-    AND glpi_tickettasks.date BETWEEN ? AND ?
-    GROUP BY glpi_tickettasks.tickets_id;`,
-    {
-      replacements: [idEntidade, dataInicial, dataFinal],
-      type: QueryTypes.SELECT,
-    }
+  const query = await fs.readFile(
+    path.resolve(__dirname, '..', 'database', 'queries', 'report.sql'),
+    'utf-8'
   );
 
-  ejs.renderFile(
-    path.resolve(__dirname, '..', 'templates', 'relatorio.ejs'),
-    { chamados },
-    (error, data) => {
-      if (error) {
-        console.error(error);
-      } else {
-        const options = {
-          format: 'A3',
-        };
-        pdf
-          .create(data, options)
-          .toFile(
-            path.resolve(__dirname, '..', 'files', nomeArquivo),
-            (error, res) => {
-              console.error(error);
-              console.error(res);
-            }
-          );
-      }
-    }
-  );
+  const chamados = await glpiDatabase.query(query, {
+    replacements: [idEntidade, dataInicial, dataFinal],
+    type: QueryTypes.SELECT,
+  });
 
-  return nomeArquivo;
+  const viewPath = path.resolve(__dirname, '..', 'templates', 'relatorio.ejs');
+  const html = await ejs.renderFile(viewPath, { chamados }, { async: true });
+  const options = {
+    format: 'A3',
+  };
+
+  const geraRelatorio = (data, opt, name) =>
+    new Promise((resolve, reject) => {
+      pdf
+        .create(data, opt)
+        .toFile(path.resolve(__dirname, '..', 'files', name), (err, res) => {
+          if (err !== null) {
+            reject(err);
+          } else {
+            resolve(res);
+          }
+        });
+    });
+
+  const result = await geraRelatorio(html, options, nomeArquivo);
+
+  return result !== undefined ? nomeArquivo : 'erro';
 }
 
 class RelatorioController {
