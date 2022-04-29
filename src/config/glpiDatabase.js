@@ -1,13 +1,12 @@
 import Sequelize from 'sequelize';
-
-require('dotenv').config();
+import config from './config';
 
 const sequelize = new Sequelize(
-  process.env.GLPI_DATABASE,
-  process.env.GLPI_USER,
-  process.env.GLPI_PASS,
+  config.glpiDbName,
+  config.glpiDbUser,
+  config.glpiDbPass,
   {
-    host: process.env.GLPI_HOST,
+    host: config.glpiDbHost,
     dialect: 'mariadb',
   }
 );
