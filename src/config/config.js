@@ -4,6 +4,8 @@ module.exports = {
   // General setup
   port: process.env.PORT || 3001,
   timezone: process.env.TIMEZONE,
+  sessionSecret: process.env.SESSION_SECRET,
+  sessionMaxAge: 604800,
 
   // SMTP to send notifications
   smtpServer: process.env.SMTP_SERVER,
