@@ -1,7 +1,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.addColumn(
-      'Horas',
+      'horas',
       'ultima_notificacao',
       Sequelize.INTEGER
     );

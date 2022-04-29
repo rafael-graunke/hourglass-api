@@ -1,7 +1,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
     Promise.all([
-      queryInterface.changeColumn('Horas', 'ultima_notificacao', {
+      queryInterface.changeColumn('horas', 'ultima_notificacao', {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       }),
@@ -9,7 +9,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) =>
     Promise.all([
-      queryInterface.changeColumn('Horas', 'ultima_notificacao', {
+      queryInterface.changeColumn('horas', 'ultima_notificacao', {
         type: Sequelize.INTEGER,
       }),
     ]),
