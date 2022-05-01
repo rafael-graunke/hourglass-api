@@ -1,4 +1,13 @@
 <html>
+<% function toHHMMSS(segundos) {
+  const hours = Math.floor(segundos / 3600);
+  let minutes = Math.floor((segundos - hours * 3600) / 60);
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+} %>
 
 <head>
   <style>
@@ -77,8 +86,8 @@
           <td><%= chamado.status === 2 ? 'Processando' : 'Solucionado' %></td>
           <td><%= chamado.requerente %></td>
           <td><%= new Date(chamado.aberto).toLocaleString('pt-BR') %></td>
-          <td><%= new Date(chamado.fechado).toLocaleString('pt-BR') %></td>
-          <td><%= chamado.tempo %></td>
+          <td><%= chamado.fechado ? new Date(chamado.fechado).toLocaleString('pt-BR') : '-'%></td>
+          <td><%= toHHMMSS(chamado.tempo) %>h</td>
           <% tempoTotal += Number(chamado.tempo) %>
         </tr>
         <%  });%>
@@ -86,7 +95,7 @@
         <tfoot>
           <tr>
             <th colspan="6">Tempo Total</th>
-            <th><%= tempoTotal %></th>
+            <th><%= toHHMMSS(tempoTotal) %>h</th>
           </tr>
         </tfoot>
       </table>
