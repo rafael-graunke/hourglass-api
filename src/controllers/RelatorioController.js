@@ -3,6 +3,7 @@ import ejs from 'ejs';
 import fs from 'fs/promises';
 import path from 'path';
 import pdf from 'html-pdf';
+import { reportQuery } from '../database/queries';
 import Relatorio from '../models/Relatorio';
 import glpiDatabase from '../config/glpiDatabase';
 
@@ -14,12 +15,7 @@ async function excluiRelatorio(nome) {
 
 async function criaRelatorio({ idEntidade, dataInicial, dataFinal }) {
   const nomeArquivo = `${Date.now().toString()}.pdf`;
-  const query = await fs.readFile(
-    path.resolve(__dirname, '..', 'database', 'queries', 'report.sql'),
-    'utf-8'
-  );
-
-  const chamados = await glpiDatabase.query(query, {
+  const chamados = await glpiDatabase.query(reportQuery, {
     replacements: [idEntidade, dataInicial, dataFinal],
     type: QueryTypes.SELECT,
   });
