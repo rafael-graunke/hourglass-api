@@ -2,10 +2,10 @@
   "name": "hourglass-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "nodemon ./src/server.js",
-    "build": "sucrase ./src -d ./dist --transforms imports"
+    "build": "babel src -d dist",
+    "start": "npm run build && node dist/server.js"
   },
   "keywords": [],
   "author": "Rafael Borges Graunke",
@@ -28,8 +28,10 @@
     "sequelize-cli": "^6.4.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.10",
     "@babel/eslint-parser": "^7.16.3",
+    "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.0",
     "@types/node": "^16.11.12",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
@@ -47,7 +49,6 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
-    "sucrase": "^3.21.0",
     "typescript": "^4.5.2"
   }
 }
