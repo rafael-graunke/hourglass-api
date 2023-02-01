@@ -1,0 +1,8 @@
+version: '1.0'
+services:
+  backend:
+    build: .
+    expose:
+      - 3001
+    ports:
+      - "3001:3001"

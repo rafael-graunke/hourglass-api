@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   // General setup
-  port: process.env.PORT || 3001,
+  port: 3001,
   timezone: process.env.TIMEZONE,
   sessionSecret: process.env.SESSION_SECRET,
   sessionMaxAge: 604800,

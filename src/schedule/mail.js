@@ -4,12 +4,6 @@ import ejs from 'ejs';
 import nodemailer from 'nodemailer';
 import config from '../config/config';
 
-// const axios = require('axios');
-// const path = require('path');
-// const ejs = require('ejs');
-// const nodemailer = require('nodemailer');
-// const config = require('../config/config');
-
 function toHHMMSS(segundos) {
   const hours = Math.floor(segundos / 3600);
   let minutes = Math.floor((segundos - hours * 3600) / 60);
